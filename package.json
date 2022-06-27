@@ -1,8 +1,8 @@
 {
-  "name": "hyperx-cloud-flight-battery-tray",
-  "productName": "hyperx-cloud-flight-battery-tray",
+  "name": "hyperx-cloud-flight-s-battery-monitor",
+  "productName": "hyperx-cloud-flight-s-battery-monitor",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "A tiny electron app, that displays the battery percentage of the HyperX Cloud Flight S Headset via a tray icon",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
