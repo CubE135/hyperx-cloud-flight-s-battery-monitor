@@ -9,7 +9,9 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "keywords": [],
   "author": {
@@ -17,6 +19,20 @@
     "email": "gitlab@cub3mail.de"
   },
   "license": "MIT",
+  "build": {
+    "productName": "HyperX Cloud Flight S Battery Monitor",
+    "appId": "hyperx-cloud-flight-s-battery-monitor",
+    "win": {
+      "icon": "src/assets/img/icon.ico"
+    },
+    "nsis": {
+      "installerIcon": "src/assets/img/icon.ico",
+      "uninstallerIcon": "src/assets/img/icon.ico",
+      "uninstallDisplayName": "${productName}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
   "config": {
     "forge": {
       "packagerConfig": {},
@@ -24,7 +40,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "hyperx_cloud_flight_battery_tray"
+            "name": "hyperx_cloud_flight_s_battery_monitor"
           }
         },
         {
@@ -55,6 +71,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.64",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.64",
     "@electron-forge/maker-zip": "^6.0.0-beta.64",
-    "electron": "19.0.6"
+    "electron": "19.0.6",
+    "electron-builder": "^23.1.0"
   }
 }
