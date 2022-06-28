@@ -12,30 +12,33 @@ if (require('electron-squirrel-startup')) {
 let tray = null
 let icons = []
 const createTray = () => {
-    icons['unknown'] = path.join(__dirname, 'assets/img/unknown.ico')
-    icons['full'] = path.join(__dirname, 'assets/img/full.ico')
-    icons['half'] = path.join(__dirname, 'assets/img/half.ico')
-    icons['low'] = path.join(__dirname, 'assets/img/low.ico')
-    icons['high'] = path.join(__dirname, 'assets/img/high.ico')
-    icons['empty'] = path.join(__dirname, 'assets/img/empty.ico')
-    tray = new Tray(icons['unknown'])
-    tray.setToolTip('Connecting...')
+  icons['no_connection'] = path.join(__dirname, 'assets/img/no_connection.ico')
+  icons['full'] = path.join(__dirname, 'assets/img/full.ico')
+  icons['half'] = path.join(__dirname, 'assets/img/half.ico')
+  icons['low'] = path.join(__dirname, 'assets/img/low.ico')
+  icons['high'] = path.join(__dirname, 'assets/img/high.ico')
+  icons['empty'] = path.join(__dirname, 'assets/img/empty.ico')
+  tray = new Tray(icons['no_connection'])
+  tray.setToolTip('Device not connected...')
 
-    const contextMenu = Menu.buildFromTemplate([
-        { label: 'Quit', type: 'normal', click: app.quit}
-    ])
-    tray.setContextMenu(contextMenu)
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Quit', type: 'normal', click: () => {
+      hyperX.stop()
+      app.quit()
+    }}
+  ])
+  tray.setContextMenu(contextMenu)
 
-    initConfig()
-    run()
+  initConfig()
+  run()
 }
 
 let hyperX = null
 function run() {
   let updateDelay = store.get('updateDelay')
-  hyperX = new HyperX(updateDelay)
+  hyperX = new HyperX(tray, icons, updateDelay)
   hyperX.runStatusUpdaterInterval()
-  hyperX.runListener(tray, icons)
+  hyperX.runListener()
 }
 
 function initConfig() {
